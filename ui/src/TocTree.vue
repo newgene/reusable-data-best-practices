@@ -14,6 +14,7 @@
           </a>
       </div>
       <p class="sidebar-header">Chapters</p>
+      <!--<toc-tree-header-list :toc="toc" :levels="3"/>-->
       <ul v-bind:class="{ current: toc.current }">
         <li v-for="entry in toc.entries" :key="entry.name" class="toctree-l1" v-bind:class="{current: entry.current}">
           <a :href="pathto(entry.name)" class="reference internal" v-bind:class="{current: entry.current}">{{ entry.title }}</a>
@@ -30,12 +31,16 @@
 </template>
 
 <script>
+//import TocTreeHeaderList from './TocTreeHeaderList.vue';
+
 export default {
+  /*components:{
+    TocTreeHeaderList
+  },*/
   data: function (){
     let toctree_data = JSON.parse(sessionStorage.getItem('toctree_data_json'))
     return {
       toc: toctree_data[0],
-      
     }
   },
   methods: {
