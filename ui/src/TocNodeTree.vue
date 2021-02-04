@@ -2,7 +2,7 @@
   <li class="node-tree" :class="[`toctree-l${node.level + 1} ${node.current?'current':''}`]" >
     <a :href="pathto(node.name?node.name:node.href)" class="reference internal" v-bind:class="{current: node.current}"
     v-bind:style="{paddingLeft: `${node.level==0?'':`${30 * node.level}px !important`}`}">{{ node.title }}</a>
-    <ul v-if="isOpen && node.children && node.children.length" v-on:click="toggleOpen">
+    <ul v-if="isOpen && node.children && node.children.length">
       <node v-for="child in node.children" :nodeData="child" :key="child.title"></node>
     </ul>
   </li>

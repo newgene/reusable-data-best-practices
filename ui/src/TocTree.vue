@@ -31,13 +31,9 @@
 </template>
 
 <script>
-//import TocTreeHeaderList from './TocTreeHeaderList.vue';
 import TocContentTree from './TocContentTree.vue';
 
 export default {
-  /*components:{
-    TocTreeHeaderList
-  },*/
   components: {
     TocContentTree
   },
