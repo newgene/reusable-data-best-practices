@@ -1,7 +1,8 @@
 <template>
-  <div class="tree">
-    <ul class="tree-list">
-      <toc-node-tree :node="treeData"></toc-node-tree>
+  <div>
+    <ul v-bind:class="{ current: child.current }" v-for="child in treeData.children" :node="child" :key="child.title"
+    style="margin: 0px;">
+      <toc-node-tree :nodeData="child"></toc-node-tree>
     </ul>
   </div>
 </template>
@@ -15,7 +16,10 @@ export default {
   },
   components: {
     TocNodeTree
-  }
+  },
+  mounted() {
+    console.log(this.treeData)
+  },
 };
 </script>
 
