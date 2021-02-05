@@ -1,7 +1,14 @@
 <template>
-  <li class="node-tree" :class="[`toctree-l${node.level + 1} ${node.current?'current':''}`]" >
-    <a :href="pathto(node.name?node.name:node.href)" class="reference internal" v-bind:class="{current: node.current}"
-    v-bind:style="{paddingLeft: `${node.level==0?'':`${30 * node.level}px !important`}`}">{{ node.title }}</a>
+  <li class="node-tree" :class="[`toctree-l${node.level + 1} ${node.current?'current':''}`]">
+    <div class="item-container">
+      <button v-if="shouldBeCollapsible && node.children && node.children.length" v-on:click="toggleOpen" class="expand-button" 
+      :style="{left: `${15 * (node.level + 1)}px`}">
+        <span v-if="isOpen"> - </span>
+        <span v-else> + </span>
+      </button>
+      <a :href="pathto(node.name?node.name:node.href)" class="reference internal" v-bind:class="{current: node.current}"
+      v-bind:style="{paddingLeft: `${node.level==0?'':`${40 * node.level}px !important`}`}">{{ node.title }}</a>
+    </div>
     <ul v-if="isOpen && node.children && node.children.length">
       <node v-for="child in node.children" :nodeData="child" :key="child.title"></node>
     </ul>
@@ -15,8 +22,11 @@ export default {
     nodeData: Object
   },
   data: function (){
+    let custom_toctree_values = JSON.parse(sessionStorage.getItem('custom_toctree_values'));
+
     return {
       isOpen: true,
+      shouldBeCollapsible: custom_toctree_values.collapsible,
       node: {}
     }
   },
@@ -93,3 +103,28 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.item-container{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.expand-button{
+  position: absolute;
+  transform: translateX(-50%);
+  height: 15px;
+  width: 15px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #53a4b8;
+  color: #5daabc;
+  background-color: transparent;
+  outline: none;
+  top: 5px;
+}
+</style>

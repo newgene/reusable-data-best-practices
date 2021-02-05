@@ -218,11 +218,10 @@
 }
 
 .flex-flow-rowwrap{
-    -webkit-flex-flow: row wrap;
-    -moz-flex-flow: row wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
     -ms-flex-flow: row wrap;
-    -o-flex-flow: row wrap;
-    flex-flow: row wrap;
+    flex-flow: row wrap
 }
 
 .intro-chapters{
@@ -341,6 +340,7 @@ div.sidebar::-webkit-scrollbar-thumb:hover {
     background-color: white;
     z-index: 100;
     position: fixed;
+    padding-top: 40px;
     border-right: 1px solid #eaecef;
     overflow: auto;
     -webkit-transform: translateX(0);
@@ -370,7 +370,7 @@ div.sidebar::-webkit-scrollbar-thumb:hover {
 }
 
 .sidebar-group .toctree-l1 a {
-    padding: .35rem 1rem .35rem 1.25rem;
+    padding: .35rem 1rem .35rem 2.25rem;
 }
 
 .sidebar-group li{

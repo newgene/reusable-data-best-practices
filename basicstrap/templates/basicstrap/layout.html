@@ -302,9 +302,10 @@
       <script type="text/javascript">
         sessionStorage.setItem("document_previews", JSON.stringify({{ document_previews_json }}));
         sessionStorage.setItem("search_path", "{{ pathto('search') }}");
-        sessionStorage.setItem("search_svg_path", "{{ pathto('_static/svg/search.svg', 1) }}")
-        sessionStorage.setItem("arrow_svg_path", "{{ pathto('_static/svg/arrow.svg', 1) }}")
-        sessionStorage.setItem("toctree_data_json", JSON.stringify({{ toctree_data_json }}))
+        sessionStorage.setItem("search_svg_path", "{{ pathto('_static/svg/search.svg', 1) }}");
+        sessionStorage.setItem("arrow_svg_path", "{{ pathto('_static/svg/arrow.svg', 1) }}");
+        sessionStorage.setItem("toctree_data_json", JSON.stringify({{ toctree_data_json }}));
+        sessionStorage.setItem("custom_toctree_values", JSON.stringify({{ custom_toctree_values }}));
       </script>
   </head>
   <body role="document"  style="width: 100%;">
@@ -318,7 +319,7 @@
     {% block basicstrapheader %}
     {%- if theme_bootstrap_version == "3" %}
         <div id="navbar-top" class="navbar {% if (theme_nav_fixed_top|tobool) %}navbar-fixed-top {% endif %}{% if (theme_header_inverse|tobool) %}navbar-inverse{% else %}navbar-default{% endif %}" role="navigation" aria-label="top navigation">
-            <div class="{% if (not theme_nav_fixed|tobool) %}container-fluid{% else %}container{% endif %}">
+            <div class="{% if (not theme_nav_fixed|tobool) %}container-fluid{% else %}container{% endif %}" style="position: fixed;top: 0;width: 100%;background-color: white;z-index: 1000;">
                 <div class="navbar-header flex center-items" style="width: 100%">
                     <div id="custom-collapse-container">
 
@@ -427,11 +428,14 @@
             {%- block document %}
 
             <div style="width:100%;">
-              <div class="flex">
+              <div class="flex flex-flow-rowwrap">
               <div>
                     <div id="estimated-read-time-container"></div>
                 </div>
-                <a href="{{ pathto('about') }}" style="margin: 0 10px; cursor:pointer;" class="header-item flex center-items">About</a>
+                <div class="flex">
+                  <a href="{{ pathto('index') }}" style="margin: 0 10px; cursor:pointer;" class="header-item flex center-items">Home</a>
+                  <a href="{{ pathto('about') }}" style="margin: 0 10px; cursor:pointer;" class="header-item flex center-items">About</a>
+                </div>
                 <div style="flex: 1;"></div>
                 <div id="preferences-container"></div>
               </div>

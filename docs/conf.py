@@ -183,11 +183,17 @@ for item in os.listdir(directory):
             filename = '_static/vue/' + item + '/' + innerFile
             vue_static.append({'type': get_static_type(filename), 'path': filename})
 
+# change to False to disable the collapsible toctree functionality
+custom_toctree_values = {
+    'collapsible': True
+}
+
 html_context = {
     'author': author,
     'date': datetime.date.today().strftime('%d/%m/%y'),
     'document_previews': preview_dict,
     'document_previews_json': json.dumps(preview_dict),
+    'custom_toctree_values': json.dumps(custom_toctree_values),
     'vue_static': vue_static
 }
 

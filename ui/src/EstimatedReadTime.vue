@@ -40,11 +40,12 @@ export default {
 
 <style scoped>
 .estimated-read-time{
-    color: #191919;
-    background-color: #d6d6d6;
-    width: fit-content;
-    padding: 5px 15px;
-    border-radius: 100px;
-    font-weight: bold;
+  color: #191919;
+  background-color: #d6d6d6;
+  width: fit-content;
+  padding: 5px 15px;
+  border-radius: 100px;
+  font-weight: bold;
+  margin: 20px 0;
 }
 </style>
