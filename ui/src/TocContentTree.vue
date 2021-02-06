@@ -1,8 +1,10 @@
 <template>
   <div>
+    <button v-on:click="expandAll">Expand all</button>
+    <button v-on:click="collapseAll">Collapse all</button>
     <ul v-bind:class="{ current: child.current }" v-for="child in treeData.children" :node="child" :key="child.title"
     style="margin: 0px;">
-      <toc-node-tree :nodeData="child"></toc-node-tree>
+      <toc-node-tree :nodeData="child" ref="node"></toc-node-tree>
     </ul>
   </div>
 </template>
@@ -24,14 +26,16 @@ export default {
     return{
       collapsed: null,
       expanded: null,
+      
     }
   },
   methods: {
     expandAll: function(){
-      this.ex
+      
+      this.$refs.node.forEach(c => c.expandAll())
     },
     collapseAll: function(){
-
+      this.$refs.node.forEach(c => c.collapseAll())
     }
   }
 };

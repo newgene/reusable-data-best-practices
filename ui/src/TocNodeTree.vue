@@ -10,7 +10,7 @@
       v-bind:style="{paddingLeft: `${node.level==0?'':`${40 * node.level}px !important`}`}">{{ node.title }}</a>
     </div>
     <ul v-if="isOpen && node.children && node.children.length">
-      <node v-for="child in node.children" :nodeData="child" :key="child.title"></node>
+      <node v-for="child in node.children" :nodeData="child" :key="child.title" ref="node"></node>
     </ul>
   </li>
 </template>
@@ -76,6 +76,18 @@ export default {
   methods: {
     toggleOpen() {
       this.isOpen = !this.isOpen
+    },
+    expandAll: function(){
+      this.isOpen = true;
+      if(this.$refs.node){
+        this.$refs.node.map(c => c.expandAll())
+      }
+    },
+    collapseAll: function(){
+      this.isOpen = false;
+      if(this.$refs.node){
+        this.$refs.node.map(c => c.collapseAll())
+      }
     },
     // can't access sphinx's pathto function so we have to compromise with our own
     pathto (to){
