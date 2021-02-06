@@ -58,25 +58,18 @@ export default {
   methods: {
     // can't access sphinx's pathto function so we have to compromise with our own
     pathto (to){
+      let mode = window.location.pathname.includes('_build') ? 'development' : 'production';
       let pathname = window.location.pathname;
       if(to.includes('#')){
         return to;
       }
-      if(pathname.includes('chapters')){
-        let index = pathname.substring(0,  pathname.indexOf("chapters"));
-        return index + `${to}.html`;
+      if(mode == 'development'){
+        let index = pathname.substring(0, pathname.indexOf("html"));
+        return index + 'html/' + `${to}.html`;
+      }else{
+        let index = pathname.location.pathname.substring(0,  pathname.location.pathname.indexOf("/", 4));
+        return index + '/' + `${to}.html`;
       }
-
-      if(pathname.includes('index.html')){
-        let index = pathname.substring(0,  pathname.indexOf("index.html"));
-        return index + `${to}.html`;
-      }
-
-      if(pathname.includes('search.html')){
-        let index = pathname.substring(0,  pathname.indexOf("search.html"));
-        return index + `${to}.html`;
-      }
-      return pathname + `${to}.html`;
     },
   },
 }

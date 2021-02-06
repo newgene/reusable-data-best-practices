@@ -11,17 +11,17 @@ export default {
   name: 'Header',
   methods: {
     pathto (to){
+      let mode = window.location.pathname.includes('_build') ? 'development' : 'production';
       let pathname = window.location.pathname;
       if(to.includes('#')){
         return to;
       }
-      if(pathname.includes('index.html')){
-        let index = pathname.substring(0,  pathname.indexOf("index.html"));
-        return index + `${to}.html`;
-      }
-      if(pathname.includes('about.html')){
-        let index = pathname.substring(0,  pathname.indexOf("about.html"));
-        return index + `${to}.html`;
+      if(mode == 'development'){
+        let index = pathname.substring(0, pathname.indexOf("html"));
+        return index + 'html/' + `${to}.html`;
+      }else{
+        let index = pathname.location.pathname.substring(0,  pathname.location.pathname.indexOf("/", 4));
+        return index + '/' + `${to}.html`;
       }
     },
   }
