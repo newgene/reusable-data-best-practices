@@ -20,6 +20,20 @@ export default {
   mounted() {
     console.log(this.treeData)
   },
+  data: function (){
+    return{
+      collapsed: null,
+      expanded: null,
+    }
+  },
+  methods: {
+    expandAll: function(){
+      this.ex
+    },
+    collapseAll: function(){
+
+    }
+  }
 };
 </script>
 

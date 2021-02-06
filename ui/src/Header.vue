@@ -20,7 +20,7 @@ export default {
         let index = pathname.substring(0, pathname.indexOf("html"));
         return index + 'html/' + `${to}.html`;
       }else{
-        let index = pathname.location.pathname.substring(0,  pathname.location.pathname.indexOf("/", 4));
+        let index = pathname.substring(0,  pathname.indexOf("/", 4));
         return index + '/' + `${to}.html`;
       }
     },
