@@ -1,7 +1,5 @@
 <template>
   <div>
-    <button v-on:click="expandAll">Expand all</button>
-    <button v-on:click="collapseAll">Collapse all</button>
     <ul v-bind:class="{ current: child.current }" v-for="child in treeData.children" :node="child" :key="child.title"
     style="margin: 0px;">
       <toc-node-tree :nodeData="child" ref="node"></toc-node-tree>
@@ -19,19 +17,14 @@ export default {
   components: {
     TocNodeTree
   },
-  mounted() {
-    console.log(this.treeData)
-  },
   data: function (){
     return{
       collapsed: null,
       expanded: null,
-      
     }
   },
   methods: {
     expandAll: function(){
-      
       this.$refs.node.forEach(c => c.expandAll())
     },
     collapseAll: function(){

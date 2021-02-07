@@ -9,7 +9,7 @@
       <a :href="pathto(node.name?node.name:node.href)" class="reference internal" v-bind:class="{current: node.current}"
       v-bind:style="{paddingLeft: `${node.level==0?'':`${40 * node.level}px !important`}`}">{{ node.title }}</a>
     </div>
-    <ul v-if="isOpen && node.children && node.children.length">
+    <ul v-if="node.children && node.children.length" :style="{display: isOpen?'block': 'none'}">
       <node v-for="child in node.children" :nodeData="child" :key="child.title" ref="node"></node>
     </ul>
   </li>
@@ -31,6 +31,7 @@ export default {
     }
   },
   created() {
+
     // children in nodeData are given in linear format which does not help when making each section collapsible
     // This algorithm iterates each node and nests the nodes appropriately
 
@@ -73,6 +74,7 @@ export default {
 
     this.node = newNode;
   },
+  
   methods: {
     toggleOpen() {
       this.isOpen = !this.isOpen
@@ -80,13 +82,13 @@ export default {
     expandAll: function(){
       this.isOpen = true;
       if(this.$refs.node){
-        this.$refs.node.map(c => c.expandAll())
+        this.$refs.node.forEach(c => c.expandAll())
       }
     },
     collapseAll: function(){
       this.isOpen = false;
       if(this.$refs.node){
-        this.$refs.node.map(c => c.collapseAll())
+        this.$refs.node.forEach(c => c.collapseAll())
       }
     },
     // can't access sphinx's pathto function so we have to compromise with our own
