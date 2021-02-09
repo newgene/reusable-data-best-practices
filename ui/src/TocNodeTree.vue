@@ -1,12 +1,12 @@
 <template>
-  <li class="node-tree" :class="[`toctree-l${node.level + 1} ${node.current?'current':''}`]">
+  <li class="node-tree" :class="[`toctree-l${node.level + 1} ${node.current?'current-fixed':''}`]">
     <div class="item-container">
       <button v-if="shouldBeCollapsible && node.children && node.children.length" v-on:click="toggleOpen" class="expand-button" 
       :style="{left: `${15 * (node.level + 1)}px`}">
         <span v-if="isOpen"> - </span>
         <span v-else> + </span>
       </button>
-      <a :href="pathto(node.name?node.name:node.href)" class="reference internal" v-bind:class="{current: node.current}"
+      <a :href="pathto(node.name?node.name:node.href)" class="reference internal" v-bind:class="{'current-fixed': node.current}"
       v-bind:style="{paddingLeft: `${node.level==0?'':`${40 * node.level}px !important`}`}">{{ node.title }}</a>
     </div>
     <ul v-if="node.children && node.children.length" :style="{display: isOpen?'block': 'none'}">

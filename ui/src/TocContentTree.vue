@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul v-bind:class="{ current: child.current }" v-for="child in treeData.children" :node="child" :key="child.title"
+    <ul v-bind:class="{ 'current-fixed': child.current }" v-for="child in treeData.children" :node="child" :key="child.title"
     style="margin: 0px;">
       <toc-node-tree :nodeData="child" ref="node"></toc-node-tree>
     </ul>

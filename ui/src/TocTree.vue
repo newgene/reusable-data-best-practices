@@ -100,21 +100,29 @@ export default {
       const hash = window.location.hash;
       console.log(hash);
 
-      // let sections = document.getElementsByClassName('section');
-      // sections.forEach(section=>{
-      //   // let rect = section.getBoundingClientRect();
-      //   if(section.offsetTop < window.pageYOffset + 10 && section.offsetTop + section.clientHeight + 10){
-      //     if(history.pushState) {
-      //       history.pushState(null, null, `#${section.id}`);
-      //     }
-      //     else {
-      //       location.hash = `#${section.id}`;
-      //     }
-      //   }
-      // })
-      // let referenceInternalLinks = document.getElementsByClassName('reference internal');
+      let sections = document.getElementsByClassName('section');
+      let referenceInternalLinks = document.getElementsByClassName('reference internal');
+
+      sections.forEach(section=>{
+        // let rect = section.getBoundingClientRect();
+        if(section.offsetTop < window.pageYOffset && section.offsetTop + section.clientHeight){
+          // if(history.pushState) {
+          //   history.pushState(null, null, `#${section.id}`);
+          // }
+          // else {
+          //   location.hash = `#${section.id}`;
+          // }
+          referenceInternalLinks.forEach(link=>{
+            if(section.id==link.getAttribute("href").substring(1)){
+              link.classList.add('current')
+            }else{
+              link.classList.remove('current');
+            }
+          })
+        }
+      })
       // referenceInternalLinks.forEach(link=>{
-      //   //console.log(link, hash)
+      //   console.log(link, hash)
       // })
     },
     expandAll: function(){
