@@ -3,6 +3,8 @@ import sys
 import pickle
 import os.path
 import urllib.request
+from urllib.request import urlopen
+from shutil import copyfileobj
 from collections import OrderedDict
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -182,10 +184,13 @@ def get_element_formatting(mdFile, index, document, item, content_length, elemen
             get(element.get('inlineObjectElement').get('inlineObjectId'))
         object_properties = inline_object.get('inlineObjectProperties').get('embeddedObject')
         image_path = object_properties.get('imageProperties').get('contentUri')
-        urllib.request.urlretrieve(image_path,
-                                   filename=f"${static_path}{image_path.split('/')[-1]}.jpg")
+        with urlopen(image_path) as in_stream, open(f"{static_path}{image_path.split('/')[-1]}.jpg", 'wb') as out_file:
+           copyfileobj(in_stream, out_file)
+
+        # urllib.request.urlretrieve(image_path,
+        #                            filename=f"{static_path}{image_path.split('/')[-1]}.jpg")
         mdFile.new_line(mdFile.new_inline_image(text='image',
-                                                path=f"${static_path}{image_path.split('/')[-1]}.jpg"))
+                                                path=f"{static_path}{image_path.split('/')[-1]}.jpg"))
 
         # add an empty character to prevent image collision with text
         mdFile.write(' ')

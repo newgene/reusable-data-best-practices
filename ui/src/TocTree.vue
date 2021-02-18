@@ -89,12 +89,12 @@ export default {
       toc: toc,
     }
   },
-  created() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  unmounted () {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
+  // created() {
+  //   window.addEventListener('scroll', this.handleScroll);
+  // },
+  // unmounted () {
+  //   window.removeEventListener('scroll', this.handleScroll);
+  // },
   methods: {
     handleScroll () {
       const hash = window.location.hash;
