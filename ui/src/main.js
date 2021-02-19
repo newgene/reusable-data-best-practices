@@ -10,6 +10,8 @@ import DynamicChapterSearch from "./DynamicChapterSearch";
 import Preferences from "./Preferences";
 import TocTree from './TocTree';
 import TocTreeCollapse from './TocTreeCollapse';
+import ChapterBoxes from './ChapterBoxes';
+import MainChapterBoxes from './MainChapterBoxes';
 import Header from './Header';
 import Footer from './Footer';
 import AOS from 'aos'
@@ -61,6 +63,14 @@ new Vue({
 new Vue({
   render: h => h(TocTreeCollapse),
 }).$mount('#toctree-collapse-container')
+
+new Vue({
+  render: h => h(MainChapterBoxes),
+}).$mount('#main-chapter-boxes-container')
+
+new Vue({
+  render: h => h(ChapterBoxes),
+}).$mount('#chapter-boxes-container')
 
 new Vue({
   render: h => h(Header),

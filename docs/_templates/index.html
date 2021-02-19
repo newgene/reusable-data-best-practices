@@ -44,70 +44,13 @@
         </div>
         <img src="{{ pathto('_static/svg/collaboration.svg', 1) }}" class="collaboration"/>
     </div>
-    <div class="flex chapters-container featured-container">
-        <h1 style="font-weight: bold; color: white; margin-top: 0;">Featured</h1>
-        <div class="flex flex-flow-rowwrap intro-chapters">
-            {% set initialUrl="" %}
-            {% set theTocTree = toctree()
-            | replace("</a>", "")
-            | replace(" href=\"", "></a>")
-            | replace("</li>", "</li>;")
-            | striptags
-            | replace("\">", "%")
-            | replace("Contents:", "") %}
-            {% set theTocTree = theTocTree.split(";") %}
-
-            {% for element in theTocTree %}
-            {% set el = element.split("%") %}
-            {% set url = el[0] | trim | safe %}
-            {% set entry = el[1] | trim | safe %}
-                {% if (loop.index==1 or loop.index==2 or loop.index==3) %}
-                    <a href="{{ url }}" style="text-decoration: none !important;">
-                        <div class="chapter-box" style="background-color: #212121 !important; color: white;">
-                            <p style="font-weight: bold">{{ entry }}</p>
-                            {% for document_preview in document_previews %}
-                                {% if document_preview.document_url == url %}
-                                    <p class="chapter-box-preview">{{ document_preview.preview[0:100] }}...</p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </div>
+    <div id="main-chapter-boxes-container"></div>
+    
     </div>
     <div class="flex chapters-container" style="margin-top: 20px;">
         <h1 class="chapter-header">Chapters</h1>
         <div id="dynamic-chapter-search-container"></div>
-        <div class="flex flex-flow-rowwrap intro-chapters">
-            {% set initialUrl="" %}
-            {% set theTocTree = toctree()
-            | replace("</a>", "")
-            | replace(" href=\"", "></a>")
-            | replace("</li>", "</li>;")
-            | striptags
-            | replace("\">", "%")
-            | replace("Contents:", "") %}
-            {% set theTocTree = theTocTree.split(";") %}
-
-            {% for element in theTocTree %}
-            {% set el = element.split("%") %}
-            {% set url = el[0] | trim | safe %}
-            {% set entry = el[1] | trim | safe %}
-                {% if url %}
-                    <a id="{{ url }}" href="{{ url }}" class="chapter-box-container" style="text-decoration: none !important;">
-                        <div class="chapter-box" >
-                            <p style="font-weight: bold">{{ entry }}</p>
-                            {% for document_preview in document_previews %}
-                                {% if document_preview.document_url == url %}
-                                    <p class="chapter-box-preview">{{ document_preview.preview[0:100] }}...</p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </div>
+        <div id="chapter-boxes-container"></div>
     </div>
     {% block relbar %}
     {% endblock %}
