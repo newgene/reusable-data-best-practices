@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-flow-rowwrap intro-chapters">
     <a class="chapter-box-link" v-for="chapter in documentPreviews" 
-    :key="chapter.document_name" :href="chapter.document_url">
+    :key="chapter.name" :href="chapter.url">
       <div class="chapter-box">
-        <p style="font-weight: bold;">{{ chapter.document_title }}</p>
+        <p style="font-weight: bold;">{{ chapter.title }}</p>
         <p class="chapter-box-preview">
           {{chapter.preview.substring(0, 100)}}
         </p>
@@ -20,10 +20,17 @@ export default {
     window: () => window,
   },
   data: function() {
-    let document_previews = sessionStorage.getItem('document_previews');
+    let document_previews = JSON.parse(sessionStorage.getItem('document_previews'));
+    let entries = JSON.parse(sessionStorage.getItem('toctree_data_json'))[0].entries;
+
+    entries.forEach((entry, i)=>{
+      let document_preview = document_previews.find(doc=>doc.document_title==entry.title);
+      entries[i].preview = document_preview.preview
+      entries[i].url = document_preview.document_url
+    })
 
     return {
-      documentPreviews: JSON.parse(document_previews)
+      documentPreviews: entries
     }
   }
 }
